@@ -2,14 +2,52 @@
 :root {
     --font-family: "Lato", sans-serif;
     --text-primary: white;
+    --text-secondary: grey;
+}
+
+body {
+    font-family: var(--font-family);
 }
 
 .header {
     padding: 30px;
-    font-family: var(--font-family);
     color: var(--text-primary);
     font-size: 30px;
     font-weight: 700;
     background-color: black;
     text-align: center;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.main__search-input {
+    padding: 10px 20px;
+    width: 30%;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 18px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid grey;
+}
+
+.main__search-input::placeholder {
+    font-size: 18px;
+    text-align: center;
+}
+
+@media (max-width: 1000px) {
+    .main__search-input {
+        width: 50%;
+    }
+}
+
+@media (max-width: 500px) {
+    .main__search-input {
+        width: 60%;
+    }
 }

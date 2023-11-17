@@ -7,6 +7,9 @@
 
 body {
     font-family: var(--font-family);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
@@ -38,6 +41,12 @@ body {
 .main__search-input::placeholder {
     font-size: 18px;
     text-align: center;
+}
+
+.footer {
+    margin-top: auto;
+    text-align: center;
+    padding: 20px;
 }
 
 @media (max-width: 1000px) {

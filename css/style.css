@@ -12,6 +12,10 @@ body {
     flex-direction: column;
 }
 
+.hide {
+    display: none !important;
+}
+
 .header {
     padding: 30px;
     color: var(--text-primary);

@@ -1,9 +1,9 @@
 import tracksList from "../assets/tracksList";
 
 const list = document.querySelector(".main__list");
+const searchInput = document.querySelector(".main__search-input");
 
-console.log(tracksList);
-tracksList.forEach((track) => {
+const tracksListWithELem = [...tracksList].map((track) => {
     const listItem = document.createElement("li");
     listItem.className = "main__list__item";
     let duration =
@@ -29,4 +29,19 @@ tracksList.forEach((track) => {
     `;
 
     list.append(listItem);
+    return { ...track, element: listItem };
+});
+
+console.log();
+
+searchInput.addEventListener("input", (e) => {
+    tracksListWithELem.forEach((track) => {
+        track.element.classList.toggle(
+            "hide",
+            !(
+                track.title.toLocaleLowerCase().includes(e.target.value) ||
+                track.artists.toLocaleLowerCase().includes(e.target.value)
+            )
+        );
+    });
 });

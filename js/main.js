@@ -3,7 +3,7 @@ import tracksList from "../assets/tracksList";
 const list = document.querySelector(".main__list");
 const searchInput = document.querySelector(".main__search-input");
 
-const tracksListWithELem = [...tracksList].map((track) => {
+const tracksListWithElem = [...tracksList].map((track) => {
     const listItem = document.createElement("li");
     listItem.className = "main__list__item";
     let duration =
@@ -29,13 +29,16 @@ const tracksListWithELem = [...tracksList].map((track) => {
     `;
 
     list.append(listItem);
-    return { ...track, element: listItem };
+    return {
+        ...track,
+        element: listItem,
+        play: false,
+        statusElement: listItem.querySelector(".main__list__item_play-btn"),
+    };
 });
 
-console.log();
-
 searchInput.addEventListener("input", (e) => {
-    tracksListWithELem.forEach((track) => {
+    tracksListWithElem.forEach((track) => {
         track.element.classList.toggle(
             "hide",
             !(
@@ -43,5 +46,21 @@ searchInput.addEventListener("input", (e) => {
                 track.artists.toLocaleLowerCase().includes(e.target.value)
             )
         );
+    });
+});
+
+const playButtons = document.querySelectorAll(".main__list__item_play-btn");
+
+playButtons.forEach((playButton, index) => {
+    playButton.addEventListener("click", () => {
+        tracksListWithElem.forEach((track) => {
+            if (track.id === index + 1) {
+                track.play = !track.play;
+                track.statusElement.innerHTML = track.play ? "⏸" : "&#9654;";
+            } else {
+                track.play = false;
+                track.statusElement.innerHTML = "&#9654;";
+            }
+        });
     });
 });

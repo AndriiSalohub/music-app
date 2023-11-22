@@ -56,6 +56,38 @@ document.addEventListener("DOMContentLoaded", () => {
         playButton.addEventListener("click", () => {
             tracksListWithElem.forEach((track) => {
                 if (track.id === index + 1) {
+                    let duration =
+                        Math.floor(track.duration / 60) > 10
+                            ? `${Math.floor(track.duration / 60)}:${
+                                  track.duration % 60 > 10
+                                      ? track.duration % 60
+                                      : "0" + (track.duration % 60)
+                              }`
+                            : `0${Math.floor(track.duration / 60)}:${
+                                  track.duration % 60 > 10
+                                      ? track.duration % 60
+                                      : "0" + (track.duration % 60)
+                              }`;
+                    if (document.querySelector(".footer")) {
+                        document.querySelector(".footer").remove();
+                    }
+                    const playbar = document.createElement("footer");
+                    playbar.className = "footer";
+                    playbar.innerHTML = `
+                    <img
+                        class="footer__playbar_img"
+                        src="${track.preview}"
+                        alt="${track.title}"
+                    />
+                    <button class="main__list__item_play-btn">&#9654;</button>
+                    <div class="footer__playbar__info">
+                        <h2 class="footer__playbar__info_title">${track.title}</h2>
+                        <p class="footer__playbar__info_author">${track.artists}</p>
+                    </div>
+                    <input type="range" class="footer__playbar__timerange" />
+                    <p class="footer__playbar_duration">${duration}</p>
+                `;
+                    document.querySelector("body").append(playbar);
                     track.play = !track.play;
                     track.statusElement.innerHTML = track.play
                         ? "⏸"

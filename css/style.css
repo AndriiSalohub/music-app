@@ -83,17 +83,20 @@ body {
 }
 
 .footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     margin-top: auto;
     text-align: center;
     display: grid;
     grid-template-columns: 1fr 1fr 3fr 8fr 1fr;
     background-color: #9340fe;
     color: var(--text-primary);
-    padding: 20px;
+    padding: 10px;
 }
 
 .footer__playbar_img {
-    width: 80px;
+    width: 60px;
     border-radius: 24%;
     justify-self: center;
 }
@@ -104,6 +107,7 @@ body {
     border: none;
     font-size: 30px;
     color: var(--text-primary);
+    color: white;
     cursor: pointer;
 }
 

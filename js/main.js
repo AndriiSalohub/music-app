@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         src="${track.preview}"
                         alt="${track.title}"
                     />
-                    <button class="main__list__item_play-btn">&#9654;</button>
+                    <button class="footer__playbar_play-btn">&#9654;</button>
                     <div class="footer__playbar__info">
                         <h2 class="footer__playbar__info_title">${track.title}</h2>
                         <p class="footer__playbar__info_author">${track.artists}</p>

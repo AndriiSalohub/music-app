@@ -92,10 +92,27 @@ document.addEventListener("DOMContentLoaded", () => {
                         ? "⏸"
                         : "&#9654;";
                     track.element.classList.toggle("active", track.play);
+                    const clonedPlayButton = playButton.cloneNode(true);
                     playbar.insertBefore(
-                        playButton.cloneNode(true),
+                        clonedPlayButton,
                         document.querySelector(".footer__playbar__info")
                     );
+
+                    clonedPlayButton.addEventListener("click", () => {
+                        if (track.id === index + 1) {
+                            track.play = !track.play;
+                            track.statusElement.innerHTML = track.play
+                                ? "⏸"
+                                : "&#9654;";
+                            clonedPlayButton.innerHTML = track.play
+                                ? "⏸"
+                                : "&#9654;";
+                        } else {
+                            track.play = false;
+                            track.element.classList.remove("active");
+                            track.statusElement.innerHTML = "&#9654;";
+                        }
+                    });
                 } else {
                     track.play = false;
                     track.element.classList.remove("active");

@@ -79,7 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         src="${track.preview}"
                         alt="${track.title}"
                     />
-                    <button class="footer__playbar_play-btn">&#9654;</button>
                     <div class="footer__playbar__info">
                         <h2 class="footer__playbar__info_title">${track.title}</h2>
                         <p class="footer__playbar__info_author">${track.artists}</p>
@@ -92,8 +91,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     track.statusElement.innerHTML = track.play
                         ? "⏸"
                         : "&#9654;";
+                    track.element.classList.toggle("active", track.play);
+                    playbar.insertBefore(
+                        playButton.cloneNode(true),
+                        document.querySelector(".footer__playbar__info")
+                    );
                 } else {
                     track.play = false;
+                    track.element.classList.remove("active");
                     track.statusElement.innerHTML = "&#9654;";
                 }
             });

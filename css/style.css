@@ -3,6 +3,8 @@
     --font-family: "Lato", sans-serif;
     --text-primary: white;
     --text-secondary: grey;
+
+    --background-primary: gainsboro;
 }
 
 body {
@@ -56,7 +58,15 @@ body {
 .main__list__item {
     display: grid;
     grid-template-columns: 1fr 1fr 10fr 1fr;
+    padding: 10px;
+    border-radius: 6px;
+    transition: background 0.3 ease-in-out;
     margin-bottom: 20px;
+}
+
+.main__list__item:hover {
+    background: var(--background-primary);
+    transition: background 0.3 ease-in-out;
 }
 
 .main__list__item_play-btn {
@@ -90,7 +100,7 @@ body {
     text-align: center;
     display: grid;
     grid-template-columns: 1fr 1fr 3fr 8fr 1fr;
-    background-color: #9340fe;
+    background-color: black;
     color: var(--text-primary);
     padding: 10px;
 }
@@ -113,6 +123,7 @@ body {
 
 .footer__playbar__info {
     justify-self: start;
+    text-align-last: left;
 }
 
 .footer__playbar__info_title {
@@ -129,6 +140,11 @@ body {
 .footer__playbar_duration {
     align-self: center;
     text-align: center;
+}
+
+.active {
+    background: var(--background-primary);
+    transition: background 0.3 ease-in-out;
 }
 
 @media (max-width: 1000px) {

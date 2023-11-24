@@ -51,9 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const playButtons = document.querySelectorAll(".main__list__item_play-btn");
+    const listItems = document.querySelectorAll("li");
 
-    playButtons.forEach((playButton, index) => {
-        playButton.addEventListener("click", () => {
+    listItems.forEach((listItem, index) => {
+        listItem.addEventListener("click", () => {
             tracksListWithElem.forEach((track) => {
                 if (track.id === index + 1) {
                     let duration =
@@ -83,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <h2 class="footer__playbar__info_title">${track.title}</h2>
                         <p class="footer__playbar__info_author">${track.artists}</p>
                     </div>
-                    <input type="range" class="footer__playbar__timerange" />
+                    <input type="range" class="footer__playbar__timerange" value="0" />
                     <p class="footer__playbar_duration">${duration}</p>
                 `;
                     document.querySelector("body").append(playbar);
@@ -92,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         ? "⏸"
                         : "&#9654;";
                     track.element.classList.toggle("active", track.play);
-                    const clonedPlayButton = playButton.cloneNode(true);
+                    const clonedPlayButton = playButtons[index].cloneNode(true);
                     playbar.insertBefore(
                         clonedPlayButton,
                         document.querySelector(".footer__playbar__info")

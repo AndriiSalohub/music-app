@@ -7,6 +7,10 @@
     --background-primary: gainsboro;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: var(--font-family);
     min-height: 100vh;
@@ -67,6 +71,10 @@ body {
 .main__list__item:hover {
     background: var(--background-primary);
     transition: background 0.3 ease-in-out;
+}
+
+.main__list__item:last-child {
+    margin-bottom: 100px;
 }
 
 .main__list__item_play-btn {
@@ -167,6 +175,10 @@ body {
 
     .main__list {
         width: 80%;
+    }
+
+    .footer__playbar__timerange {
+        width: 90%;
     }
 }
 

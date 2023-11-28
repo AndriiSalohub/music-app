@@ -3,6 +3,7 @@ import tracksList from "../assets/tracksList";
 document.addEventListener("DOMContentLoaded", () => {
     const list = document.querySelector(".main__list");
     const searchInput = document.querySelector(".main__search-input");
+    let currentTrack; // Объявляем переменную для хранения текущего трека
 
     const tracksListWithElem = [...tracksList].map((track) => {
         const listItem = document.createElement("li");
@@ -43,8 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
             track.element.classList.toggle(
                 "hide",
                 !(
-                    track.title.toLocaleLowerCase().includes(e.target.value) ||
-                    track.artists.toLocaleLowerCase().includes(e.target.value)
+                    track.title.toLowerCase().includes(e.target.value) ||
+                    track.artists.toLowerCase().includes(e.target.value)
                 )
             );
         });
@@ -57,6 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
         listItem.addEventListener("click", () => {
             tracksListWithElem.forEach((track) => {
                 if (track.id === index + 1) {
+                    if (currentTrack) {
+                        currentTrack.pause();
+                    }
+
                     let duration =
                         Math.floor(track.duration / 60) > 10
                             ? `${Math.floor(track.duration / 60)}:${
@@ -69,9 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
                                       ? track.duration % 60
                                       : "0" + (track.duration % 60)
                               }`;
+
                     if (document.querySelector(".footer")) {
                         document.querySelector(".footer").remove();
                     }
+
                     const playbar = document.createElement("footer");
                     playbar.className = "footer";
                     playbar.innerHTML = `
@@ -99,6 +106,20 @@ document.addEventListener("DOMContentLoaded", () => {
                         document.querySelector(".footer__playbar__info")
                     );
 
+                    if (currentTrack) {
+                        if (!(currentTrack.src === track.src)) {
+                            currentTrack = new Audio(
+                                tracksListWithElem[index].src
+                            );
+                        }
+                    } else {
+                        currentTrack = new Audio(tracksListWithElem[index].src);
+                    }
+
+                    if (track.play) {
+                        currentTrack.play();
+                    }
+
                     clonedPlayButton.addEventListener("click", () => {
                         if (track.id === index + 1) {
                             track.play = !track.play;
@@ -108,10 +129,16 @@ document.addEventListener("DOMContentLoaded", () => {
                             clonedPlayButton.innerHTML = track.play
                                 ? "⏸"
                                 : "&#9654;";
+                            if (track.play) {
+                                currentTrack.play();
+                            } else {
+                                currentTrack.pause();
+                            }
                         } else {
                             track.play = false;
                             track.element.classList.remove("active");
                             track.statusElement.innerHTML = "&#9654;";
+                            currentTrack.pause();
                         }
                     });
                 } else {

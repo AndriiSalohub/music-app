@@ -3,7 +3,7 @@ import tracksList from "../assets/tracksList";
 document.addEventListener("DOMContentLoaded", () => {
     const list = document.querySelector(".main__list");
     const searchInput = document.querySelector(".main__search-input");
-    let currentTrack; // Объявляем переменную для хранения текущего трека
+    let currentTrack;
 
     const tracksListWithElem = [...tracksList].map((track) => {
         const listItem = document.createElement("li");
@@ -141,6 +141,25 @@ document.addEventListener("DOMContentLoaded", () => {
                             currentTrack.pause();
                         }
                     });
+
+                    function updateDurationElement() {
+                        currentTrack.addEventListener("timeupdate", () => {
+                            const currentMinute = Math.floor(
+                                currentTrack.currentTime / 60
+                            );
+                            const currentSecond = Math.floor(
+                                currentTrack.currentTime % 60
+                            );
+                            document.querySelector(
+                                ".footer__playbar_duration"
+                            ).textContent = `${
+                                currentMinute < 10 ? "0" : ""
+                            }${currentMinute}:${
+                                currentSecond < 10 ? "0" : ""
+                            }${currentSecond}`;
+                        });
+                    }
+                    updateDurationElement();
                 } else {
                     track.play = false;
                     track.element.classList.remove("active");

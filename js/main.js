@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <h2 class="footer__playbar__info_title">${track.title}</h2>
                         <p class="footer__playbar__info_author">${track.artists}</p>
                     </div>
-                    <input type="range" class="footer__playbar__timerange" value="0" />
+                    <input type="range" class="footer__playbar__timerange" value="0" step="0.01" />
                     <p class="footer__playbar_duration">${duration}</p>
                 `;
                     document.querySelector("body").append(playbar);
@@ -150,6 +150,11 @@ document.addEventListener("DOMContentLoaded", () => {
                             const currentSecond = Math.floor(
                                 currentTrack.currentTime % 60
                             );
+                            const totalTime = currentTrack.duration;
+
+                            playbarTimerange.value =
+                                (currentTrack.currentTime / totalTime) * 100;
+
                             document.querySelector(
                                 ".footer__playbar_duration"
                             ).textContent = `${
@@ -168,6 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         const seekTime =
                             (playbarTimerange.value / 100) *
                             currentTrack.duration;
+                        console.log(playbarTimerange.value);
                         currentTrack.currentTime = seekTime;
                     });
 

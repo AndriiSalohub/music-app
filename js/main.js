@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                     });
 
-                    function updateDurationElement() {
+                    const updateDurationElement = () => {
                         currentTrack.addEventListener("timeupdate", () => {
                             const currentMinute = Math.floor(
                                 currentTrack.currentTime / 60
@@ -158,7 +158,19 @@ document.addEventListener("DOMContentLoaded", () => {
                                 currentSecond < 10 ? "0" : ""
                             }${currentSecond}`;
                         });
-                    }
+                    };
+
+                    const playbarTimerange = playbar.querySelector(
+                        ".footer__playbar__timerange"
+                    );
+
+                    playbarTimerange.addEventListener("input", () => {
+                        const seekTime =
+                            (playbarTimerange.value / 100) *
+                            currentTrack.duration;
+                        currentTrack.currentTime = seekTime;
+                    });
+
                     updateDurationElement();
                 } else {
                     track.play = false;

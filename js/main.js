@@ -44,8 +44,12 @@ document.addEventListener("DOMContentLoaded", () => {
             track.element.classList.toggle(
                 "hide",
                 !(
-                    track.title.toLowerCase().includes(e.target.value) ||
-                    track.artists.toLowerCase().includes(e.target.value)
+                    track.title
+                        .toLowerCase()
+                        .includes(e.target.value.toLowerCase()) ||
+                    track.artists
+                        .toLowerCase()
+                        .includes(e.target.value.toLowerCase())
                 )
             );
         });
@@ -97,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     document.querySelector("body").append(playbar);
                     track.play = !track.play;
                     track.statusElement.innerHTML = track.play
-                        ? "⏸"
+                        ? "&#10073;&#10073;"
                         : "&#9654;";
                     track.element.classList.toggle("active", track.play);
                     const clonedPlayButton = playButtons[index].cloneNode(true);
@@ -124,10 +128,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         if (track.id === index + 1) {
                             track.play = !track.play;
                             track.statusElement.innerHTML = track.play
-                                ? "⏸"
+                                ? "&#10073;&#10073;"
                                 : "&#9654;";
                             clonedPlayButton.innerHTML = track.play
-                                ? "⏸"
+                                ? "&#10073;&#10073;"
                                 : "&#9654;";
                             if (track.play) {
                                 currentTrack.play();
